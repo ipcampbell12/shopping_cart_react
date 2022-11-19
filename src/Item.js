@@ -8,6 +8,11 @@ const numberFormatter =
     });
 
 function Item(props) {
+
+    const addItem = () => {
+
+    }
+
     return (
 
         <div className='item' id={props.id}>
@@ -15,7 +20,7 @@ function Item(props) {
                 <td>{props.product_name}</td>
                 <td>{numberFormatter.format(props.price)}</td>
                 <td><img src={props.image} alt={props.product_name} className="images" /></td>
-                <td><button id={`item-${props.id}`}>Add</button></td>
+                <td><button id={`item-${props.id}`} onClick={addItem}>Add</button></td>
             </tr>
         </div>
 

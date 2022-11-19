@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.scss'
 
 function Cart(props) {
+
+
     return (
         <div className="cart-items">
 
@@ -15,6 +17,7 @@ function Cart(props) {
                     <th>Add</th>
                     <th>Remove </th>
                 </tr>
+
 
             </table>
 
