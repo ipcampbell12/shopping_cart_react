@@ -1,9 +1,9 @@
 
 import React, { useState } from 'react';
-import Item from './Item';
-import Title from './Title';
-import Cart from './Cart';
-import LowerCart from './LowerCart';
+import Items from './Components/Items';
+import Title from './Components/Title';
+//import Cart from './Cart';
+//import LowerCart from './LowerCart';
 import './App.scss';
 
 
@@ -19,6 +19,8 @@ function App() {
     { id: 4, product_name: 'Starship Voyager', price: 46000000000, quantity: 1, image: 'https://149455152.v2.pressablecdn.com/wp-content/uploads/2016/09/star-trek-voyager.jpg' }
   ])
 
+
+
   return (
     <div className='app'>
       <div className="container">
@@ -28,16 +30,13 @@ function App() {
             <thead>
             </thead>
             <tbody id="items-table">
-              {items.map(item => (
-                <Item id={item.id} product_name={item.product_name} price={item.price} image={item.image} />
-              ))}
+              <Items items={items} />
             </tbody>
           </table>
         </div>
         <div className="cart">
           <h3>Shopping Cart</h3>
-          <Cart />
-          <LowerCart />
+
 
         </div>
 
