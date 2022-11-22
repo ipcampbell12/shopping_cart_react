@@ -1,12 +1,7 @@
 import React from 'react';
-
+import { numberFormatter } from '../App';
 import '../App.scss'
 
-const numberFormatter =
-    new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD'
-    });
 
 function LowerCart({ grandTotal }) {
     return (

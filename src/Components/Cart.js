@@ -1,7 +1,7 @@
 import CartItem from './CartItem';
 import '../App.scss'
 
-function Cart({ cartItems, onSum }) {
+function Cart({ cartItems, onSum, onDelete }) {
 
     return (
         <div className="cart-items">
@@ -12,7 +12,8 @@ function Cart({ cartItems, onSum }) {
                     <tr>
                         <th>Ships</th>
                         <th>Price</th>
-                        <th>Ship Total</th>
+                        <th>Quantity</th>
+                        <th>Total Cost</th>
                         <th>Add</th>
                         <th>Remove </th>
                     </tr>
@@ -22,6 +23,8 @@ function Cart({ cartItems, onSum }) {
                         <CartItem
                             item={item}
                             onSum={onSum}
+                            key={item.id}
+                            onDelete={onDelete}
 
                         />
                     ))}

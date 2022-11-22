@@ -1,15 +1,8 @@
 
 import { useState } from 'react'
+import { numberFormatter } from '../App';
 
-
-const numberFormatter =
-    new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD'
-    });
-
-
-function CartItem({ item, onSum }) {
+function CartItem({ item, onSum, onDelete }) {
 
     const [state, setState] = useState({ quantity: 1, totalPrice: item.price })
     const quantity = state.quantity
@@ -25,9 +18,10 @@ function CartItem({ item, onSum }) {
         setState(prevTotal => {
             return { ...prevTotal, totalPrice: total }
         })
+
+        //sends it back to state in App.js
         onSum(quantity, total, id)
     }
-
 
 
     const incTotal = (e) => {
@@ -56,10 +50,11 @@ function CartItem({ item, onSum }) {
         )
         getTotal(quantity - 1, itemId)
 
+        if (quantity - 1 === 0) {
+            onDelete(itemId)
+        }
+
     }
-
-
-
 
     return (
 

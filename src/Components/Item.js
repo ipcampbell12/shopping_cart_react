@@ -1,11 +1,5 @@
 import '../App.scss'
-
-const numberFormatter =
-    new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD'
-    });
-
+import { numberFormatter } from '../App';
 
 function Item({ item, onAdd }) {
 

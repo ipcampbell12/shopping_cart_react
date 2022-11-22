@@ -6,6 +6,12 @@ import Cart from './Components/Cart'
 import LowerCart from './Components/LowerCart';
 import './App.scss';
 
+export const numberFormatter =
+  new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  });
+
 
 
 
@@ -13,10 +19,10 @@ function App() {
 
   //initialize state with shop items
   const [items, setItems] = useState([
-    { id: 1, product_name: 'Borg Cube', price: 200, quantity: 1, image: 'https://i.pinimg.com/originals/d1/64/33/d16433a04e9832e04fac43c3f27dddb7.jpg' },
-    { id: 2, product_name: 'Millenium Falcon', price: 400, quantity: 1, image: 'https://cdn.mos.cms.futurecdn.net/uciG9WygFRtEDcvw9gitTd.jpg' },
-    { id: 3, product_name: 'Serenity', price: 600, quantity: 1, image: 'https://www.geeksofdoom.com/GoD/img/2013/12/firefly-serenity-e1387241089451-530x326.jpg' },
-    { id: 4, product_name: 'Starship Voyager', price: 800, quantity: 1, image: 'https://149455152.v2.pressablecdn.com/wp-content/uploads/2016/09/star-trek-voyager.jpg' }
+    { id: 1, product_name: 'Borg Cube', price: 200, quantity: 1, total: 200, image: 'https://i.pinimg.com/originals/d1/64/33/d16433a04e9832e04fac43c3f27dddb7.jpg' },
+    { id: 2, product_name: 'Millenium Falcon', price: 400, quantity: 1, total: 400, image: 'https://cdn.mos.cms.futurecdn.net/uciG9WygFRtEDcvw9gitTd.jpg' },
+    { id: 3, product_name: 'Serenity', price: 600, quantity: 1, total: 600, image: 'https://www.geeksofdoom.com/GoD/img/2013/12/firefly-serenity-e1387241089451-530x326.jpg' },
+    { id: 4, product_name: 'Starship Voyager', price: 800, quantity: 1, total: 800, image: 'https://149455152.v2.pressablecdn.com/wp-content/uploads/2016/09/star-trek-voyager.jpg' }
   ])
 
   //Initilaize state for cart items
@@ -41,17 +47,17 @@ function App() {
       alert("You can only add the item once. Use plus and minus buttons to change the quantity")
     }
 
-
   }
 
+  const deleteItem = (id) => {
+    setCartItems(cartItems.filter((item) => item.id !== id))
+    //console.log(itemToDelete)
+  }
 
   //find total of all items in shopping cart state
-  //I don't think you would initialize at 0
   const grandTotal = cartItems.reduce((accumulator, val) => {
     return accumulator + val.total
   }, 0)
-
-
 
   const onSum = (quantity, total, id) => {
     const itemtoUpdate = cartItems.find(item => item.id === id)
@@ -67,7 +73,7 @@ function App() {
 
   }
 
-  //console.log(cartItems)
+  console.log(cartItems)
 
 
 
@@ -86,7 +92,7 @@ function App() {
         </div>
         <div className="cart">
           <h3>Shopping Cart</h3>
-          <Cart cartItems={cartItems} onSum={onSum} />
+          <Cart cartItems={cartItems} onSum={onSum} onDelete={deleteItem} />
 
           <LowerCart grandTotal={grandTotal} />
 
