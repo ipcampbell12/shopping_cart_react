@@ -1,7 +1,7 @@
 import CartItem from './CartItem';
 import '../App.scss'
 
-function Cart({ cartItems }) {
+function Cart({ cartItems, onSum }) {
 
     return (
         <div className="cart-items">
@@ -21,6 +21,7 @@ function Cart({ cartItems }) {
                     {cartItems.map((item) => (
                         <CartItem
                             item={item}
+                            onSum={onSum}
 
                         />
                     ))}

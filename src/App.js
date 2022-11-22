@@ -3,8 +3,7 @@ import React, { useState } from 'react';
 import Items from './Components/Items';
 import Title from './Components/Title';
 import Cart from './Components/Cart'
-//import Cart from './Cart';
-//import LowerCart from './LowerCart';
+import LowerCart from './Components/LowerCart';
 import './App.scss';
 
 
@@ -35,6 +34,7 @@ function App() {
 
     //send the item to the shopping cart
 
+    //ADDS the item to cartItems
     if (!cartItems.includes(itemToSend)) {
       setCartItems(prevItems => [...prevItems, itemToSend])
     } else {
@@ -46,9 +46,28 @@ function App() {
 
 
   //find total of all items in shopping cart state
-  const sumItems = cartItems.reduce((total, val) => {
-    return total + val.price
+  //I don't think you would initialize at 0
+  const grandTotal = cartItems.reduce((accumulator, val) => {
+    return accumulator + val.total
   }, 0)
+
+
+
+  const onSum = (quantity, total, id) => {
+    const itemtoUpdate = cartItems.find(item => item.id === id)
+    const updatedItem = { ...itemtoUpdate, quantity: quantity, total: total }
+
+    //return a copy of cartItems that replaces the previous item with the updated item
+    //UPDATES the item already IN cartItems
+    setCartItems(cartItems.map(item => {
+      if (item.id === id) {
+        item = updatedItem
+      } return item
+    }))
+
+  }
+
+  //console.log(cartItems)
 
 
 
@@ -67,9 +86,9 @@ function App() {
         </div>
         <div className="cart">
           <h3>Shopping Cart</h3>
-          <Cart cartItems={cartItems} />
+          <Cart cartItems={cartItems} onSum={onSum} />
 
-
+          <LowerCart grandTotal={grandTotal} />
 
 
         </div>

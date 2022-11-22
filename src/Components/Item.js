@@ -1,5 +1,11 @@
 import '../App.scss'
 
+const numberFormatter =
+    new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+    });
+
 
 function Item({ item, onAdd }) {
 
@@ -14,7 +20,7 @@ function Item({ item, onAdd }) {
     return (
         <tr>
             <td >{item.product_name}</td>
-            <td >{item.price}</td>
+            <td >{numberFormatter.format(item.price)}</td>
             <td><img src={`${item.image}`} alt={`${item.product_name}`} className='images' /></td>
             <td><button onClick={onClick} id={`item-${item.id}`}>Add To Cart</button></td>
         </tr>
