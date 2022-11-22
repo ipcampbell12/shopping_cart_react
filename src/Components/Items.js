@@ -7,7 +7,7 @@ import Item from './Item';
         currency: 'USD'
     }); */
 
-const Items = ({ items }) => {
+const Items = ({ items, onAdd }) => {
 
 
     return (
@@ -15,7 +15,7 @@ const Items = ({ items }) => {
         <>
             {items.map((item) => (
 
-                <Item key={item.id} item={item} />
+                <Item key={item.id} item={item} onAdd={onAdd} />
 
             ))}
         </>
