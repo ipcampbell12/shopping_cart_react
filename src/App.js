@@ -48,7 +48,7 @@ function App() {
       setCartItems(prevItems => [...prevItems, itemToSend])
 
     } else {
-
+      alert("You have already added that item")
     }
 
   }
