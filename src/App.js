@@ -5,6 +5,8 @@ import Title from './Components/Title';
 import Cart from './Components/Cart'
 import LowerCart from './Components/LowerCart';
 import './App.scss';
+import Alert from "react-bootstrap/Alert";
+import Message from './Components/Message';
 
 export const numberFormatter =
   new Intl.NumberFormat('en-US', {
@@ -25,6 +27,7 @@ function App() {
     { id: 4, product_name: 'Starship Voyager', price: 800, quantity: 1, total: 800, image: 'https://149455152.v2.pressablecdn.com/wp-content/uploads/2016/09/star-trek-voyager.jpg' }
   ])
 
+
   //Initilaize state for cart items
   const [cartItems, setCartItems] = useState([])
 
@@ -43,8 +46,9 @@ function App() {
     //ADDS the item to cartItems
     if (!cartItems.includes(itemToSend)) {
       setCartItems(prevItems => [...prevItems, itemToSend])
+
     } else {
-      alert("You can only add the item once. Use plus and minus buttons to change the quantity")
+
     }
 
   }
@@ -73,7 +77,7 @@ function App() {
 
   }
 
-  console.log(cartItems)
+  //console.log(cartItems)
 
 
 
@@ -92,12 +96,18 @@ function App() {
         </div>
         <div className="cart">
           <h3>Shopping Cart</h3>
-          <Cart cartItems={cartItems} onSum={onSum} onDelete={deleteItem} />
 
-          <LowerCart grandTotal={grandTotal} />
-
+          {cartItems.length > 0 ? (<Cart cartItems={cartItems} onSum={onSum} onDelete={deleteItem} />) :
+            (<Alert variant="success" style={{ width: "42rem", textAlign: 'center' }}>
+              <Alert.Heading>
+                There are no tasks to show
+              </Alert.Heading>
+            </Alert>)
+          }
 
         </div>
+
+        <LowerCart grandTotal={grandTotal} />
 
       </div>
     </div>

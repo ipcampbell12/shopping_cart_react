@@ -63,8 +63,8 @@ function CartItem({ item, onSum, onDelete }) {
             <td >{numberFormatter.format(item.price)}</td>
             <td >{quantity}</td>
             <td >{numberFormatter.format(totalPrice)}</td>
-            <td ><button onClick={incTotal} id={`item-${item.id}`}>+</button></td>
-            <td ><button onClick={decTotal} id={`item-${item.id}`}>-</button></td>
+            <td ><button onClick={incTotal} id={`item-${item.id}`} className="increase">+</button></td>
+            <td ><button onClick={decTotal} id={`item-${item.id}`} className="decrease">-</button></td>
         </tr>
     );
 }
