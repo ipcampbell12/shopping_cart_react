@@ -65,6 +65,10 @@ function App() {
 
   }
 
+  const clearShoppingCart = () => {
+    setCartItems(cartItems.filter((item) => item.id < 0))
+    console.log('items cleared')
+  }
 
   const deleteItem = (id) => {
     setCartItems(cartItems.filter((item) => item.id !== id))
@@ -118,7 +122,7 @@ function App() {
 
         </div>
 
-        <LowerCart grandTotal={grandTotal} />
+        <LowerCart grandTotal={grandTotal} onClear={clearShoppingCart} />
 
       </div>
     </div>
