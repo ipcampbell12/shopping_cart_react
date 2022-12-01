@@ -203,3 +203,63 @@
 
 
 }
+
+
+.alert-danger {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background: rgb(227, 93, 93);
+  border-radius: var(--border-setting);
+  box-shadow: var(--shadow-setting);
+  padding: .5em;
+  cursor: pointer;
+
+
+  .text {
+
+    color: black;
+    //margin-right: 5em;
+  }
+
+  .close {
+    margin-left: 3em;
+    color: black;
+    font-weight: bold;
+  }
+
+}
+
+.alert-success {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background: lightgreen;
+  border-radius: var(--border-setting);
+  box-shadow: var(--shadow-setting);
+  padding: .5em;
+  cursor: pointer;
+
+
+  .text {
+
+    color: black;
+    //margin-right: 5em;
+  }
+
+  .close {
+    margin-left: 3em;
+    color: black;
+    font-weight: bold;
+  }
+
+}
+
+.no-tasks {
+  text-align: center;
+  background: lightblue;
+  border-radius: var(--border-setting);
+  box-shadow: var(--shadow-setting);
+  padding: .5em;
+
+}

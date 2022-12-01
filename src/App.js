@@ -4,9 +4,10 @@ import Items from './Components/Items';
 import Title from './Components/Title';
 import Cart from './Components/Cart'
 import LowerCart from './Components/LowerCart';
+import AddedAlert from './Components/AddedAlert'
 import './App.scss';
-import Alert from "react-bootstrap/Alert";
-import Message from './Components/Message';
+import { Alert } from "react-bootstrap";
+
 
 export const numberFormatter =
   new Intl.NumberFormat('en-US', {
@@ -21,37 +22,43 @@ function App() {
 
   //initialize state with shop items
   const [items, setItems] = useState([
-    { id: 1, product_name: 'Borg Cube', price: 200, quantity: 1, total: 200, image: 'https://i.pinimg.com/originals/d1/64/33/d16433a04e9832e04fac43c3f27dddb7.jpg' },
-    { id: 2, product_name: 'Millenium Falcon', price: 400, quantity: 1, total: 400, image: 'https://cdn.mos.cms.futurecdn.net/uciG9WygFRtEDcvw9gitTd.jpg' },
-    { id: 3, product_name: 'Serenity', price: 600, quantity: 1, total: 600, image: 'https://www.geeksofdoom.com/GoD/img/2013/12/firefly-serenity-e1387241089451-530x326.jpg' },
-    { id: 4, product_name: 'Starship Voyager', price: 800, quantity: 1, total: 800, image: 'https://149455152.v2.pressablecdn.com/wp-content/uploads/2016/09/star-trek-voyager.jpg' }
+    { id: 1, product_name: 'Borg Cube', price: 200, image: 'https://i.pinimg.com/originals/d1/64/33/d16433a04e9832e04fac43c3f27dddb7.jpg' },
+    { id: 2, product_name: 'Millenium Falcon', price: 400, image: 'https://cdn.mos.cms.futurecdn.net/uciG9WygFRtEDcvw9gitTd.jpg' },
+    { id: 3, product_name: 'Serenity', price: 600, image: 'https://www.geeksofdoom.com/GoD/img/2013/12/firefly-serenity-e1387241089451-530x326.jpg' },
+    { id: 4, product_name: 'Starship Voyager', price: 800, image: 'https://149455152.v2.pressablecdn.com/wp-content/uploads/2016/09/star-trek-voyager.jpg' }
   ])
-
+  //quantity and total should be in cart items, not items database
+  //items database shouldn't contain user specific information, which goes inside cartitems state
 
   //Initilaize state for cart items
   const [cartItems, setCartItems] = useState([])
 
+  const [show, setShow] = useState(false)
 
-  const addItem = (item) => {
+  const addItem = (itemId) => {
     //get the id of the item that was clicked 
-    const itemId = item
 
     //look for the item in state that matches the id of the item that was clicked
-    const itemToSend = items.find(item => item.id === itemId)
+    const itemToSend = items.find(item => item.id === itemId);
 
-    //console.log(itemToSend)
+    const updatedItem = { ...itemToSend, quantity: 1, total: itemToSend.price }
 
-    //send the item to the shopping cart
+    const itemAlreadyExists = cartItems.find(item => item.id === itemId);
 
-    //ADDS the item to cartItems
-    if (!cartItems.includes(itemToSend)) {
-      setCartItems(prevItems => [...prevItems, itemToSend])
-
-    } else {
-      alert("You have already added that item")
+    if (itemAlreadyExists) {
+      setShow(true)
+      return;
+      //use return to stop the function
     }
 
+    setCartItems(prevItems => [...prevItems, updatedItem])
+
+    // itemToSend?.quantity //optional chaining operator 
+
+    //includes doesn't work for objects - only works for primitive data
+
   }
+
 
   const deleteItem = (id) => {
     setCartItems(cartItems.filter((item) => item.id !== id))
@@ -96,10 +103,10 @@ function App() {
         </div>
         <div className="cart">
           <h3>Shopping Cart</h3>
-
+          {show ? <AddedAlert show={show} setShow={setShow} /> : ''}
           {cartItems.length > 0 ? (<Cart cartItems={cartItems} onSum={onSum} onDelete={deleteItem} />) :
-            (<Alert variant="success" style={{ width: "42rem", textAlign: 'center' }}>
-              <Alert.Heading>
+            (<Alert variant="success" className="no-tasks">
+              <Alert.Heading >
                 There are no tasks to show
               </Alert.Heading>
             </Alert>)
