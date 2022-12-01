@@ -34,6 +34,7 @@ function App() {
   const [cartItems, setCartItems] = useState([])
 
   const [show, setShow] = useState(false)
+  const [danger, setDanger] = useState(false)
 
   const addItem = (itemId) => {
     //get the id of the item that was clicked 
@@ -46,12 +47,17 @@ function App() {
     const itemAlreadyExists = cartItems.find(item => item.id === itemId);
 
     if (itemAlreadyExists) {
+      setDanger(true)
       setShow(true)
       return;
       //use return to stop the function
     }
 
     setCartItems(prevItems => [...prevItems, updatedItem])
+    setDanger(false)
+    setShow(true)
+
+
 
     // itemToSend?.quantity //optional chaining operator 
 
@@ -84,10 +90,6 @@ function App() {
 
   }
 
-  //console.log(cartItems)
-
-
-
   return (
     <div className='app'>
       <div className="container">
@@ -103,7 +105,9 @@ function App() {
         </div>
         <div className="cart">
           <h3>Shopping Cart</h3>
-          {show ? <AddedAlert show={show} setShow={setShow} /> : ''}
+          <br />
+          {show ? <AddedAlert show={show} setShow={setShow} danger={danger} /> : ''}
+          <br />
           {cartItems.length > 0 ? (<Cart cartItems={cartItems} onSum={onSum} onDelete={deleteItem} />) :
             (<Alert variant="success" className="no-tasks">
               <Alert.Heading >
