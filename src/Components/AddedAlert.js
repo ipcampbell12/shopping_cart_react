@@ -1,8 +1,15 @@
 
 import Alert from 'react-bootstrap/Alert';
+import { useEffect } from 'react'
 
 
 function AddedAlert({ show, setShow, danger }) {
+
+    useEffect(() => {
+        setTimeout(() => setShow(false), 1000)
+    })
+
+
 
     if (show) {
         return (
@@ -14,8 +21,9 @@ function AddedAlert({ show, setShow, danger }) {
             </Alert>
         );
 
-    }
 
+    }
+    setTimeout(() => setShow(false), 2000)
 }
 
 export default AddedAlert;
