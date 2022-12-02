@@ -6,7 +6,7 @@ function AddedAlert({ show, setShow, danger }) {
 
     if (show) {
         return (
-            <Alert variant="danger" className={danger ? 'alert-danger' : 'alert-success'}>
+            <Alert variant={danger ? 'danger' : 'success'}>
                 {danger ?
                     <span className='text'>This item has already been added. Use the "+" and "-" buttons to adjust the quantity </span> :
                     <span className='text'>Item added to cart successfully</span>}

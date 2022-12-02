@@ -7,6 +7,9 @@ import LowerCart from './Components/LowerCart';
 import AddedAlert from './Components/AddedAlert'
 import './App.scss';
 import { Alert } from "react-bootstrap";
+import ClearModal from './Components/ClearModal';
+
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 
 export const numberFormatter =
@@ -30,11 +33,20 @@ function App() {
   //quantity and total should be in cart items, not items database
   //items database shouldn't contain user specific information, which goes inside cartitems state
 
-  //Initilaize state for cart items
+  //SHOPPING CART
   const [cartItems, setCartItems] = useState([])
 
+
+  //ALERTS
   const [show, setShow] = useState(false)
   const [danger, setDanger] = useState(false)
+
+  //MODAL
+  const [modalShow, setModalShow] = useState(false);
+  const handleClose = () => setModalShow(false);
+  const handleShow = () => setModalShow(true);
+
+
 
   const addItem = (itemId) => {
     //get the id of the item that was clicked 
@@ -67,7 +79,6 @@ function App() {
 
   const clearShoppingCart = () => {
     setCartItems(cartItems.filter((item) => item.id < 0))
-    console.log('items cleared')
   }
 
   const deleteItem = (id) => {
@@ -113,7 +124,7 @@ function App() {
           {show ? <AddedAlert show={show} setShow={setShow} danger={danger} /> : ''}
           <br />
           {cartItems.length > 0 ? (<Cart cartItems={cartItems} onSum={onSum} onDelete={deleteItem} />) :
-            (<Alert variant="success" className="no-tasks">
+            (<Alert variant="primary" className="no-tasks">
               <Alert.Heading >
                 There are no tasks to show
               </Alert.Heading>
@@ -122,8 +133,8 @@ function App() {
 
         </div>
 
-        <LowerCart grandTotal={grandTotal} onClear={clearShoppingCart} />
-
+        <LowerCart grandTotal={grandTotal} onClear={handleShow} />
+        {modalShow ? <ClearModal modalShow={modalShow} handleClose={handleClose} onClear={clearShoppingCart} /> : ''}
       </div>
     </div>
   )
