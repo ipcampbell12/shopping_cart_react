@@ -9,6 +9,7 @@ import './App.scss';
 import { Alert } from "react-bootstrap";
 import ClearModal from './Components/ClearModal';
 
+
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 
@@ -36,16 +37,17 @@ function App() {
   //SHOPPING CART
   const [cartItems, setCartItems] = useState([])
 
-
-
   //ALERTS
   const [show, setShow] = useState(false)
   const [danger, setDanger] = useState(false)
 
   //MODAL
   const [modalShow, setModalShow] = useState(false);
+  const [modalSubmit, setModalSubmit] = useState(false)
   const handleClose = () => setModalShow(false);
   const handleShow = () => setModalShow(true);
+  const setToSubmit = () => setModalSubmit(true);
+  const setToClear = () => setModalSubmit(false);
 
 
 
@@ -81,6 +83,8 @@ function App() {
   const clearShoppingCart = () => {
     setCartItems(cartItems.filter((item) => item.id < 0))
   }
+
+
 
   const deleteItem = (id) => {
     setCartItems(cartItems.filter((item) => item.id !== id))
@@ -142,8 +146,9 @@ function App() {
 
         </div>
 
-        <LowerCart grandTotal={grandTotal} onClear={handleShow} quantityTotal={quantityTotal} />
-        {modalShow ? <ClearModal modalShow={modalShow} handleClose={handleClose} onClear={clearShoppingCart} /> : ''}
+        <LowerCart grandTotal={grandTotal} onShow={handleShow} quantityTotal={quantityTotal} setToSubmit={setToSubmit} setToClear={setToClear} />
+        {modalShow ? <ClearModal modalShow={modalShow} handleClose={handleClose} onClear={clearShoppingCart} submit={modalSubmit} grandTotal={grandTotal} quantityTotal={quantityTotal} /> : ''}
+
       </div>
     </div>
   )
