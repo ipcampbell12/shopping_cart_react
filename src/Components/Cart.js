@@ -26,6 +26,7 @@ function Cart({ cartItems, onSum, onDelete }) {
                             key={item.id}
                             onDelete={onDelete}
 
+
                         />
                     ))}
                 </tbody>

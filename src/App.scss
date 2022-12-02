@@ -165,22 +165,31 @@
   .lower-cart {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
+    width: 100vh;
 
 
     .icon-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
 
       .icon {
         width: 4em;
         height: 4em;
         mix-blend-mode: multiply;
+
+
       }
 
       .quantity {
-        width: 4em;
-        height: 4em;
+        width: 2.5em;
+        height: 2.5em;
         text-align: center;
+        font-size: .75em;
+        font-weight: bold;
         background: red;
+
 
       }
 
@@ -194,7 +203,7 @@
       padding: .5em;
       margin: .5em;
       width: 15%;
-      height: 4em;
+      height: 10%;
       border: solid 1px black;
       border-radius: var(--border-setting);
       box-shadow: var(--shadow-setting);
@@ -238,6 +247,7 @@
   .text {
 
     color: black;
+    font-weight: bold;
     //margin-right: 5em;
   }
 
@@ -262,6 +272,7 @@
   .text {
 
     color: black;
+    font-weight: bold;
     //margin-right: 5em;
   }
 

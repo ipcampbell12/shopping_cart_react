@@ -37,6 +37,7 @@ function App() {
   const [cartItems, setCartItems] = useState([])
 
 
+
   //ALERTS
   const [show, setShow] = useState(false)
   const [danger, setDanger] = useState(false)
@@ -86,9 +87,14 @@ function App() {
     //console.log(itemToDelete)
   }
 
-  //find total of all items in shopping cart state
+  //find total cost of all items in shopping cart state
   const grandTotal = cartItems.reduce((accumulator, val) => {
     return accumulator + val.total
+  }, 0)
+
+  //find total quantity of all items in shopping cart state
+  const quantityTotal = cartItems.reduce((accumulator, val) => {
+    return accumulator + val.quantity
   }, 0)
 
   const onSum = (quantity, total, id) => {
@@ -104,6 +110,9 @@ function App() {
     }))
 
   }
+
+
+
 
   return (
     <div className='app'>
@@ -133,7 +142,7 @@ function App() {
 
         </div>
 
-        <LowerCart grandTotal={grandTotal} onClear={handleShow} />
+        <LowerCart grandTotal={grandTotal} onClear={handleShow} quantityTotal={quantityTotal} />
         {modalShow ? <ClearModal modalShow={modalShow} handleClose={handleClose} onClear={clearShoppingCart} /> : ''}
       </div>
     </div>
