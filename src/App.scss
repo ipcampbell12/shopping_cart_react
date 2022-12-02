@@ -165,8 +165,28 @@
   .lower-cart {
     display: flex;
     flex-direction: row;
-    justify-content: right;
-    width: 100vh;
+    justify-content: space-around;
+
+
+    .icon-container {
+
+      .icon {
+        width: 4em;
+        height: 4em;
+        mix-blend-mode: multiply;
+      }
+
+      .quantity {
+        width: 4em;
+        height: 4em;
+        text-align: center;
+        background: red;
+
+      }
+
+
+    }
+
 
 
 
@@ -174,7 +194,7 @@
       padding: .5em;
       margin: .5em;
       width: 15%;
-      height: 2em;
+      height: 4em;
       border: solid 1px black;
       border-radius: var(--border-setting);
       box-shadow: var(--shadow-setting);
