@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 function AddedAlert({ show, setShow, danger }) {
 
     useEffect(() => {
-        setTimeout(() => setShow(false), 1000)
+        setTimeout(() => setShow(false), 4000)
     })
 
 

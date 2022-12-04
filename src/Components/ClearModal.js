@@ -1,10 +1,12 @@
 
+import { clear } from '@testing-library/user-event/dist/clear';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { numberFormatter } from '../App';
 
 
-function ClearModal({ handleClose, modalShow, onClear, submit, grandTotal, quantityTotal }) {
+
+function ClearModal({ handleClose, modalShow, onClear, submit, grandTotal, quantityTotal, openAlert, setSubmit, setClear }) {
 
     if (submit) {
 
@@ -25,10 +27,11 @@ function ClearModal({ handleClose, modalShow, onClear, submit, grandTotal, quant
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={event => {
-                        handleClose(); onClear();
+                        setSubmit(); handleClose(); onClear(); openAlert();
                     }}>
                         Yes
                     </Button>
+
                     <Button variant="primary" onClick={handleClose} >No, continue shopping</Button>
                 </Modal.Footer>
             </Modal>
@@ -50,7 +53,7 @@ function ClearModal({ handleClose, modalShow, onClear, submit, grandTotal, quant
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={event => {
-                        handleClose(); onClear();
+                        setClear(); handleClose(); onClear(); openAlert();
                     }}>
                         Yes
                     </Button>

@@ -8,6 +8,7 @@ import AddedAlert from './Components/AddedAlert'
 import './App.scss';
 import { Alert } from "react-bootstrap";
 import ClearModal from './Components/ClearModal';
+import CartAlert from './Components/CartAlert';
 
 
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
@@ -41,13 +42,24 @@ function App() {
   const [show, setShow] = useState(false)
   const [danger, setDanger] = useState(false)
 
-  //MODAL
+
+  const [showCartAlert, setShowCartAlert] = useState(false)
+  const openAlert = () => setShowCartAlert(true);
+  const closeAlert = () => setShowCartAlert(false);
+
+  const [submitAlert, setSubmitAlert] = useState(false)
+  const setAlertToSubmit = () => setSubmitAlert(true);
+  const setAlertToClear = () => setSubmitAlert(false);
+
+
+  //MODALS
   const [modalShow, setModalShow] = useState(false);
   const [modalSubmit, setModalSubmit] = useState(false)
   const handleClose = () => setModalShow(false);
   const handleShow = () => setModalShow(true);
   const setToSubmit = () => setModalSubmit(true);
   const setToClear = () => setModalSubmit(false);
+
 
 
 
@@ -134,6 +146,7 @@ function App() {
         <div className="cart">
           <h3>Shopping Cart</h3>
           <br />
+          {showCartAlert ? <CartAlert show={showCartAlert} setShow={setShowCartAlert} submit={submitAlert} closeAlert={closeAlert} /> : ''}
           {show ? <AddedAlert show={show} setShow={setShow} danger={danger} /> : ''}
           <br />
           {cartItems.length > 0 ? (<Cart cartItems={cartItems} onSum={onSum} onDelete={deleteItem} />) :
@@ -147,14 +160,12 @@ function App() {
         </div>
 
         <LowerCart grandTotal={grandTotal} onShow={handleShow} quantityTotal={quantityTotal} setToSubmit={setToSubmit} setToClear={setToClear} />
-        {modalShow ? <ClearModal modalShow={modalShow} handleClose={handleClose} onClear={clearShoppingCart} submit={modalSubmit} grandTotal={grandTotal} quantityTotal={quantityTotal} /> : ''}
-
+        {modalShow ? <ClearModal modalShow={modalShow} handleClose={handleClose} onClear={clearShoppingCart} submit={modalSubmit} grandTotal={grandTotal} quantityTotal={quantityTotal} openAlert={openAlert} closeAlert={closeAlert} setSubmit={setAlertToSubmit} setClear={setAlertToClear} /> : ''}
       </div>
     </div>
   )
 }
 
-// <Cart cartItems={cartItems} />
 
 
 
